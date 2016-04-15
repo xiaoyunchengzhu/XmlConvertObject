@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<url>
+    <!-- 一： Id：唯一标识符，获取对象用。
+              Class:对象的包名，路径。
+              Type:如果有这个属性，则是引用xml给自定义的对象类型,只有定义一个xml中的对象属性时，才能有这个属性。
+              propertyName ：属性为对象的属性名字，同时这个节点指定了在xml中对象。
+              add ：节点。增加一个对象节点，或属性节点。
+              @Type/Id ：指定 Id，类型的节点对象。
+         二：
+              String 特殊类；
+              string :String 节点。集合直接作为属性或者成员的时候不写Id.和对象一样。
+              string 的值直接声明在内容里。如<string>我的世界 </string>
+         三 ：
+              引用。
+                    对象属性的引用：如果一个对象的属性是另一个节点对象，则用@Type/Id 这种方式指定另一个 xml的对象作为此对象的属性值。
+                    集合成员的引用：集合成员都是add来表示集合中增加一个对象想增加已经定义节点的属性，比如   <add Id="res1" Type="Object" ></add>
+                    这种方式，表示引用Id为res1,类型为Object的对象。
+              对象属性本节点初始化：如果一个对象的属性是一个对象并且自定义到这个对象的节点中，则在这个对象节点内容也生成子节点表示属性，并且指定propertyName，
+              比如 <add Class="com.diditea.module.model.Response"
+                        Id="re9"
+                        error="http://www.baidutest.com"
+                        success="300"
+                        type="get">
+                            <add Class="com.diditea.module.model.DataUrlBean"
+                                propertyName="dataUrlBean"
+                                name="login.;ki"
+                                url="/fdsg/gds/geds/gew"
+                                expires="300"
+                                type="get"/>
+                 </add>
+
+    -->
+    <List>
+
+        <li Id="list1"  >
+            <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean"
+                name="test"
+                url="http://www.baidutest.com"
+                expires="300"
+                type="get"/>
+            <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean"
+                name="login.name"
+                url="http://google.com"
+                expires="200"
+                type="get"
+                />
+        </li>
+        <li Id="list2">
+            <string>you are gay</string>
+            <string>I like book</string>
+            <string>I am a boy</string>
+        </li>
+        <li  Id="list3"  >
+            <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.Response"
+                error="http://www.baidutest.com"
+                success="300"
+                type="get"
+                dataUrlBean="@Object/dataUrlBean1"
+                >
+                </add>
+            <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.Response"
+                error="@String/error"
+                success="200"
+                type="get"
+                dataUrlBean="@Object/dataUrlBean1"
+                >
+                </add>
+            <add Id="response2" Type="Object" ></add>
+        </li>
+
+    </List>
+    <Object>
+
+        <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean"
+            Id="dataUrlBean1"
+            name="login.name"
+            url="/fdsg/gds/geds/gew"
+            expires="200"
+            type="get"/>
+        <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.Person"
+            Id="person1"
+            name="okewalnk"
+            age="52"
+            list="@List/list1"
+            >
+        </add>
+        <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.Response"
+            Id="response1"
+            error="http://www.baidutest.com"
+            success="300"
+            type="get"
+            dataUrlBean="@Object/dataUrlBean1"
+            >
+
+        </add>
+        <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.Response"
+            Id="response2"
+            error="@String/error"
+            success="300"
+            type="get">
+            <add Class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean"
+                propertyName="dataUrlBean"
+                name="@String/lihua"
+                url="/fdsg/gds/geds/gew"
+                expires="300"
+                type="get"/>
+        </add>
+    </Object>
+    <String>
+       <string Id="boy1" >I am a good boy</string>
+        <string Id="lihua">李华</string>
+        <string Id="error">this is a 很大的错误</string>
+    </String>
+</url>
