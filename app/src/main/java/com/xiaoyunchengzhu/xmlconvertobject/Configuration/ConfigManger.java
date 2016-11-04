@@ -1,5 +1,9 @@
 package com.xiaoyunchengzhu.xmlconvertobject.Configuration;
 
+import com.xiaoyunchengzhu.xmlconvertobject.resolve.ConfigResolve;
+
+import java.io.File;
+
 /**
  * Created by zhangshiyu on 2016/4/13.
  * manage converter'object,xml to object.
@@ -7,40 +11,20 @@ package com.xiaoyunchengzhu.xmlconvertobject.Configuration;
 public class ConfigManger {
 
     private ConfigConverter configConverter;
-    public  String listNode="List";
-    public  String objectNode="Object";
-    public  String stringNode="String";
+    private ConfigResourcesSection configResourcesSection;
+    public ConfigManger(){
+        this.configResourcesSection=new ConfigResourcesSection();
+        configConverter=new ConfigResolve(configResourcesSection);
+    }
+    public ConfigManger(File file){
+        this.configResourcesSection=new ConfigResourcesSection(file);
+        configConverter=new ConfigResolve(configResourcesSection);
+    }
 
-    public Object convertList(String id)
-    {
-        configConverter=new ListConverter(listNode);
-        return  configConverter.convert(id);
+    public<T> T convert(String id){
+        return (T) configConverter.convert(id);
     }
-    public Object convertObject(String id)
-    {
-        configConverter=new ObjectConverter(objectNode);
-        return configConverter.convert(id);
-    }
-    public Object convertString(String id)
-    {
-        configConverter=new StringConverter(stringNode);
-        return configConverter.convert(id);
-    }
-    protected Object convert(String id,String type)
-    {
-        Object o=null;
-          if (type.equals(listNode))
-          {
-              o= convertList(id);
-          }else if (type.equals(objectNode))
-          {
-              o= convertObject(id);
-          }else if (type.equals(stringNode))
-          {
-              o=convertString(id);
-          }
-        return o;
 
-    }
+
 
 }

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns="http://www.w3school.com.cn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.w3.org/1999/xhtml" xsi:noNamespaceSchemaLocation="schema.xsd"
+
+
+>
+    <!--xmlns:p="http://www.w3.org/1999/xhtml"-->
+    <!-- 一： Id：唯一标识符，获取对象用。
+              Class:对象的包名，路径。
+              Type:如果有这个属性，则是引用xml给自定义的对象类型,只有定义一个xml中的对象属性时，才能有这个属性。
+              propertyName ：属性为对象的属性名字，同时这个节点指定了在xml中对象。
+              add ：节点。增加一个对象节点，或属性节点。
+              @Type/Id ：指定 Id，类型的节点对象。
+         二：
+              String 特殊类；
+              string :String 节点。集合直接作为属性或者成员的时候不写Id.和对象一样。
+              string 的值直接声明在内容里。如<string>我的世界 </string>
+         三 ：
+              引用。
+                    对象属性的引用：如果一个对象的属性是另一个节点对象，则用@Type/Id 这种方式指定另一个 xml的对象作为此对象的属性值。
+                    集合成员的引用：集合成员都是add来表示集合中增加一个对象想增加已经定义节点的属性，比如   <add Id="res1" Type="Object" ></add>
+                    这种方式，表示引用Id为res1,类型为Object的对象。
+              对象属性本节点初始化：如果一个对象的属性是一个对象并且自定义到这个对象的节点中，则在这个对象节点内容也生成子节点表示属性，并且指定propertyName，
+              比如 <add Class="com.diditea.module.model.Response"
+                        Id="re9"
+                        error="http://www.baidutest.com"
+                        success="300"
+                        type="get">
+                            <add Class="com.diditea.module.model.DataUrlBean"
+                                propertyName="dataUrlBean"
+                                name="login.;ki"
+                                url="/fdsg/gds/geds/gew"
+                                expires="300"
+                                type="get"/>
+                 </add>
+
+     -->
+        <list id="list1"  >
+            <object class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean">
+                <property name="url" value="http://www.baidutest.com"/>
+                <property name="name" value="test"/>
+                <property name="expires" value="300"/>
+                <property name="type" value="get"/>
+            </object>
+
+            <object class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean"
+                >
+            <property name="url" value="http://www.baidutest.com"/>
+            <property name="name" value="login.name"/>
+            <property name="expires" value="200"/>
+            <property name="type" >get</property>
+            </object>
+
+        </list>
+        <list id="list2">
+            <string>you are gay</string>
+            <string>you are kio</string>
+            <string>you are w</string>
+            <string>you are bak</string>
+            <string>you are fuck</string>
+
+
+        </list>
+        <list  id="list3"  >
+            <object class="com.xiaoyunchengzhu.xmlconvertobject.model.Response">
+                <property name="error" value="http://www.baidutest.com"/>
+                <property name="success">300</property>
+                <property name="type">get</property>
+                <property name="dataUrlBean" value="@object/dataUrlBean1"/>
+                </object>
+
+            <object class="com.xiaoyunchengzhu.xmlconvertobject.model.Response">
+                <property name="error" value="http://www.baidutest.com"/>
+                <property name="success">300</property>
+                <property name="type">get</property>
+                <property name="dataUrlBean" >
+                    <object class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean">
+                        <property name="url" value="http://www.baidutest.com"/>
+                        <property name="name" value="login.name"/>
+                        <property name="expires" value="200"/>
+                        <property name="type" >get</property>
+                    </object>
+                </property>
+                </object>
+            <object ref="@object/response1"  ></object>
+
+            <object class="com.xiaoyunchengzhu.xmlconvertobject.model.Response" >
+                <property name="error" value="@string/boy1"></property>
+                <property name="success" value="100"></property>
+                <property name="type" value="get"/>
+                <property name="dataUrlBean" value="@@object/response1"/>
+            </object>
+
+        </list>
+
+
+    <map id="map1">
+        <entity value="wfew" key="wef"/>
+         <entity>
+             <key>key1</key><value>jiol</value>
+         </entity>
+        <entity>
+           <key>
+               <string>
+                   我的世界我做主
+               </string>
+           </key>
+            <value>
+             grefe
+            </value>
+        </entity>
+        <entity  key="@string/boy1" value="@object/response1"></entity>
+    </map>
+        <object class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean"
+            id="dataUrlBean1">
+            <property name="url" value="http://www.baidutest.com"/>
+            <property name="name" value="login.name"/>
+            <property name="expires" value="200"/>
+            <property name="type" >get</property>
+        </object>
+        <object class="com.xiaoyunchengzhu.xmlconvertobject.model.Person"
+            id="person1">
+            <property name="name" value="sofe"/>
+            <property name="age">52</property>
+            <property name="list" value="@list/list1"/>
+        </object>
+    <object class="com.xiaoyunchengzhu.xmlconvertobject.model.Person">
+        <property name="name" value="wfin"/>
+        <property name="age" value="12"></property>
+        <property name="list" value="@list/list1"/>
+    </object>
+        <object class="com.xiaoyunchengzhu.xmlconvertobject.model.Response"
+            id="response1"
+
+            >
+            <property name="error" value="http"/>
+            <property name="success">300</property>
+            <property name="type">get</property>
+            <property name="dataUrlBean" value="@object/dataUrlBean1"/>
+        </object>
+
+
+        <object class="com.xiaoyunchengzhu.xmlconvertobject.model.Response"
+            id="response2">
+            <property name="error" value="http://www.baidutest.com"/>
+            <property name="success">300</property>
+            <property name="type">get</property>
+            <property name="dataUrlBean" >
+                <object class="com.xiaoyunchengzhu.xmlconvertobject.model.DataUrlBean">
+                    <property name="url" value="http://www.baidutest.com"/>
+                    <property name="name" value="login.name"/>
+                    <property name="expires" value="200"/>
+                    <property name="type" >get</property>
+                </object>
+            </property>
+
+        </object>
+
+
+
+
+    <char id="char1" >f</char>
+    <string id="lihua">李华</string>
+    <string id="error">swfeg</string>
+    <int id="int1">52</int>
+    <int id="wf">1</int>
+    <long id="long1">12345678</long>
+    <float id="float1">12.0</float>
+    <char id="char1">a</char>
+    <double id="double1">213.55</double>
+    <boolean ref="@boolean/boolean2" id="boolean1">true</boolean>
+    <boolean  id="boolean2" >false</boolean>
+    <string id="boy1">I am a 小男孩</string>
+
+
+
+
+
+</config>

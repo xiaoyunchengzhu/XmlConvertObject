@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.w3school.com.cn"
+    xmlns="http://www.w3school.com.cn"
+    elementFormDefault="qualified"
+    >
+
+
+
+    <xs:element name="config"  >
+        <xs:complexType>
+
+            <xs:choice  minOccurs="0" maxOccurs="unbounded">
+                <xs:element  name="boolean" type="boolean"></xs:element>
+                <xs:element    name="int" type="int"></xs:element>
+                <xs:element name="char" type="char"></xs:element>
+                <xs:element  name="double" type="double"></xs:element>
+                <xs:element  name="float" type="float"></xs:element>
+                <xs:element  name="long" type="long"></xs:element>
+                <xs:element  name="short" type="short"></xs:element>
+                <xs:element  name="byte" type="byte"></xs:element>
+                <xs:element  name="string" type="string"></xs:element>
+                <xs:element  name="object" type="object"></xs:element>
+                <xs:element  name="list" type="list"></xs:element>
+                <xs:element  name="map" type="map"></xs:element>
+                <xs:element  name="null"></xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:group name="config">
+        <xs:choice id="config">
+            <xs:element id="boolean" name="boolean" type="boolean"></xs:element>
+            <xs:element  id="int"  name="int" type="int"></xs:element>
+            <xs:element id="char" name="char" type="char"></xs:element>
+            <xs:element id="double" name="double" type="double"></xs:element>
+            <xs:element id="float" name="float" type="float"></xs:element>
+            <xs:element id="long" name="long" type="long"></xs:element>
+            <xs:element id="short" name="short" type="short"></xs:element>
+            <xs:element id="byte" name="byte" type="byte"></xs:element>
+            <xs:element  name="string" type="string"></xs:element>
+            <xs:element id="object" name="object" type="object"></xs:element>
+            <xs:element id="list" name="list" type="list"></xs:element>
+            <xs:element id="map" name="map" type="map"></xs:element>
+            <xs:element id="null" name="null"></xs:element>
+        </xs:choice>
+    </xs:group>
+
+
+
+
+    <xs:complexType name="boolean"  >
+        <xs:simpleContent>
+            <xs:extension base="xs:boolean">
+            <xs:attribute name="id" type="xs:token"   />
+            <xs:attribute name="ref" type="xs:string"  default="@boolean" />
+            </xs:extension>
+        </xs:simpleContent>
+
+    </xs:complexType>
+    <xs:complexType name="int">
+        <xs:simpleContent>
+            <xs:extension base="xs:int">
+            <xs:attribute name="id" type="xs:token"  />
+            <xs:attribute name="ref" type="xs:string"  default="@int" />
+            </xs:extension>
+        </xs:simpleContent>
+
+    </xs:complexType>
+    <xs:complexType name="char">
+        <xs:simpleContent>
+            <xs:extension base="xs:char">
+            <xs:attribute name="id" type="xs:string"  />
+            <xs:attribute name="ref" type="xs:string"  default="@char" />
+            </xs:extension>
+        </xs:simpleContent>
+
+    </xs:complexType>
+    <xs:complexType name="double">
+        <xs:simpleContent>
+        <xs:extension base="xs:double">
+        <xs:attribute name="id" type="xs:token"  />
+        <xs:attribute name="ref" type="xs:string"  default="@double" />
+        </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="float">
+        <xs:simpleContent>
+            <xs:extension base="xs:float">
+            <xs:attribute name="id" type="xs:token"  />
+            <xs:attribute name="ref" type="xs:string"  default="@float" />
+            </xs:extension>
+        </xs:simpleContent>
+
+    </xs:complexType>
+    <xs:complexType name="long">
+        <xs:simpleContent >
+            <xs:extension base="xs:long">
+        <xs:attribute name="id" type="xs:token"  />
+        <xs:attribute name="ref" type="xs:string"  default="@long" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="short">
+        <xs:simpleContent>
+            <xs:extension base="xs:short">
+            <xs:attribute name="id" type="xs:token" />
+            <xs:attribute name="ref" type="xs:string"  default="@short" />
+            </xs:extension>
+        </xs:simpleContent>
+
+    </xs:complexType>
+    <xs:complexType name="byte">
+        <xs:simpleContent>
+            <xs:extension base="xs:byte">
+                <xs:attribute name="id" type="xs:token" />
+                <xs:attribute name="ref" type="xs:string"  default="@byte" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="string" mixed="true">
+        <xs:complexContent>
+            <xs:extension base="xs:string">
+                <xs:sequence>
+                    <xs:element name="null"/>
+                </xs:sequence>
+                <xs:attribute name="id" type="xs:token" />
+                <xs:attribute name="ref" type="xs:string" default="@string/"  form="qualified"  />
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="object" mixed="true" >
+        <xs:annotation>
+            <xs:documentation>
+                对象的配置
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice minOccurs="0" maxOccurs="unbounded" >
+            <xs:element name="property" type="property" />
+
+        </xs:choice>
+        <xs:attribute name="id" type="xs:token"></xs:attribute>
+        <xs:attribute name="ref" type="xs:string" default="@object"></xs:attribute>
+        <xs:attribute name="class" type="xs:string"></xs:attribute>
+        <xs:attribute name="p" type="string" form="qualified"/>
+
+        <xs:anyAttribute  />
+
+
+    </xs:complexType>
+     <xs:complexType name="property" mixed="true">
+         <xs:choice minOccurs="0" maxOccurs="unbounded">
+             <xs:group ref="config"></xs:group>
+
+         </xs:choice>
+         <xs:attribute  name="name" type="xs:string" use="required"></xs:attribute>
+         <xs:attribute name="value" type="xs:string" default="@" ></xs:attribute>
+         <xs:anyAttribute/>
+     </xs:complexType>
+    <xs:complexType name="list" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="config"></xs:group>
+
+        </xs:choice>
+        <xs:attribute name="id" type="xs:string"></xs:attribute>
+        <xs:attribute name="ref" type="xs:string" default="@object"></xs:attribute>
+        <xs:anyAttribute/>
+    </xs:complexType>
+    <xs:complexType name="map" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <!--<xs:group ref="config"></xs:group>-->
+            <xs:element name="entity" type="entity"></xs:element>
+            <xs:element name="null"/>
+        </xs:choice>
+        <xs:attribute name="id" type="xs:token"></xs:attribute>
+        <xs:attribute name="ref" type="xs:string" default="@object"></xs:attribute>
+
+    </xs:complexType>
+
+
+    <xs:complexType name="entity" mixed="true"   >
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="value" type="entity_item" ></xs:element>
+            <xs:element name="key" type="entity_item"></xs:element>
+        </xs:choice>
+        <xs:attribute name="value"  default="@"  ></xs:attribute>
+        <xs:attribute name="key"     default="@"></xs:attribute>
+    </xs:complexType>
+     <xs:simpleType name="restration">
+         <xs:restriction >
+             <xs:pattern value="(@string)+"></xs:pattern>
+         </xs:restriction>
+     </xs:simpleType>
+    <xs:complexType name="entity_item" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="1">
+            <xs:group ref="config"></xs:group>
+        </xs:choice>
+    </xs:complexType>
+
+
+
+
+
+
+
+
+</xs:schema>
