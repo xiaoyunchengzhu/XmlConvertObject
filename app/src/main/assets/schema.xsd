@@ -67,14 +67,15 @@
         </xs:simpleContent>
 
     </xs:complexType>
-    <xs:complexType name="char">
+    <xs:complexType name="char" mixed="true">
         <xs:simpleContent>
-            <xs:extension base="xs:char">
-            <xs:attribute name="id" type="xs:string"  />
-            <xs:attribute name="ref" type="xs:string"  default="@char" />
-            </xs:extension>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="1"/>
+                <xs:maxLength value="1"/>
+                <xs:attribute name="ref" type="xs:string"  default="@char" />
+                <xs:attribute name="id" type="xs:string" />
+            </xs:restriction>
         </xs:simpleContent>
-
     </xs:complexType>
     <xs:complexType name="double">
         <xs:simpleContent>
