@@ -5,6 +5,39 @@
 同时还有一些固定的配置，比如数据库的初始化配置，还有一些本地参数的配置。这些都需要管理。有时并不需要把所有的配置都放到内存中。
      其实那些配置还有一些要设置的参数，都可以用对象来整合起来。用对象的方式，更方便，更能清楚的表示所要展示或者配置的东西。比如要请求所需要的参数都需要用对象表示，这里说的不是请求业务数据，而是系统参数，
 比如请求方式，请求超时，请求url,缓存超时，等。
-     这个项目要解决的就是把这些参数设置都放到xml中，然后xml数据转换成你自定义的对象。同时想要从服务器更改数据，只需要更新最新的xml中的配置数据就可以了，不必更新整个app.这个项目，把xml配置放到了assets资源包下，
+        这个项目要解决的就是把这些参数设置都放到xml中，然后xml数据转换成你自定义的对象。同时想要从服务器更改数据，只需要更新最新的xml中的配置数据就可以了，不必更新整个app.这个项目，把xml配置放到了assets资源包下，
      如果更新了，要把xml文件放到本地存储里面，就可以从服务器时时更新这些配置。目前这块我没有实现。只是实现了数据配置的转换。
-     
+   
+   更新内容：增加了注解方式来通过注解处理器绑定xml文件中的id 到 对象。对对象进行初始化，实例化。annotation processor 来预处理注解，Javapoet来生成类 在生成的类中对被注解的对象进行初始化。
+   
+   public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    @InjectView(R.id.show)
+     TextView show;
+    Gson gson;
+    @XmlId("list1")
+    List<DataUrlBean> list1;
+    @XmlId("list2")
+    List<String> list2;
+    @XmlId("list3")
+    List<Response> list3;
+    @XmlId("dataUrlBean1")
+    DataUrlBean dataUrlBean1;
+    @XmlId("person1")
+    Person person1;
+    @XmlId("response1")
+    Response response1;
+    @XmlId("response2")
+    Response response2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        XmlResolve.find(this);
+        ButterKnife.inject(this);
+        gson=new Gson();
+	   //···
+  }
+  
+  
+  通过XmlResolve.find(this);这个方法，那么可以在之后愉快的使用被注解的对象了。
