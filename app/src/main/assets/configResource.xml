@@ -172,6 +172,7 @@
 
 
 
+
     <char id="char1" >f</char>
     <string id="lihua">李华</string>
     <string id="error">swfeg</string>
@@ -184,9 +185,6 @@
     <boolean ref="@boolean/boolean2" id="boolean1">true</boolean>
     <boolean  id="boolean2" >false</boolean>
     <string id="boy1">I am a 小男孩</string>
-
-
-
 
 
 </config>

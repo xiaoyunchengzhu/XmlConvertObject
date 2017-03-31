@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/XmlConvertObject.iml" filepath="$PROJECT_DIR$/XmlConvertObject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/annotationconvert/annotationconvert.iml" filepath="$PROJECT_DIR$/annotationconvert/annotationconvert.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
